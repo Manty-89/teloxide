@@ -90,7 +90,7 @@ where
 /// [`delete_webhook`]: crate::payloads::DeleteWebhook
 /// [`stop`]: crate::stop::StopToken::stop
 /// [`options.address`]: Options::address
-/// [`with_graceful_shutdown`]: axum::Server::with_graceful_shutdown
+/// [`with_graceful_shutdown`]: axum::serve::Serve::with_graceful_shutdown
 ///
 /// ## Returns
 ///
