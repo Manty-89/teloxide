@@ -17,10 +17,10 @@ documentation = "https://docs.rs/teloxide-core/"
 proc-macro = true
 
 [dependencies]
-quote = "1.0.7"
-proc-macro2 = "1.0.67"
-syn = { version = "1.0.13", features = ["full"] }
-heck = "0.4.0"
+quote = "1.0.36"
+proc-macro2 = "1.0.85"
+syn = { version = "1.0.109", features = ["full"] }
+heck = "0.4.1"
 
 [package.metadata.release]
 tag-prefix = "macros-"
