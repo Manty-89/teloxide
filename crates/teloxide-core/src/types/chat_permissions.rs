@@ -44,7 +44,7 @@ bitflags::bitflags! {
     /// let permissions_v3 = permissions_v1 - ChatPermissions::SEND_MESSAGES;
     /// assert!(!permissions_v3.contains(ChatPermissions::SEND_VIDEOS));
     /// ```
-    #[derive(Serialize, Deserialize)]
+    #[derive(Clone, Copy, Serialize, Deserialize, Debug, Eq, PartialEq, Hash)]
     #[serde(from = "ChatPermissionsRaw", into = "ChatPermissionsRaw")]
     pub struct ChatPermissions: u16 {
         /// Set if the user is allowed to send text messages, contacts,
@@ -53,7 +53,7 @@ bitflags::bitflags! {
 
         /// Set if the user is allowed to send polls, implies
         /// `SEND_MESSAGES`.
-        const SEND_POLLS = (1 << 2) | Self::SEND_MESSAGES.bits;
+        const SEND_POLLS = (1 << 2) | Self::SEND_MESSAGES.bits();
 
         /// Set if the user is allowed to send animations, games, stickers and
         /// use inline bots, implies `SEND_MEDIA_MESSAGES`.
@@ -79,40 +79,40 @@ bitflags::bitflags! {
 
         /// Set if the user is allowed to send audios. implies
         /// `SEND_MESSAGES`.
-        const SEND_AUDIOS = (1 << 9) | Self::SEND_MESSAGES.bits;
+        const SEND_AUDIOS = (1 << 9) | Self::SEND_MESSAGES.bits();
 
         /// Set if the user is allowed to send documents. implies
         /// `SEND_MESSAGES`.
-        const SEND_DOCUMENTS = (1 << 10) | Self::SEND_MESSAGES.bits;
+        const SEND_DOCUMENTS = (1 << 10) | Self::SEND_MESSAGES.bits();
 
         /// Set if the user is allowed to send photos. implies
         /// `SEND_MESSAGES`.
-        const SEND_PHOTOS = (1 << 11) | Self::SEND_MESSAGES.bits;
+        const SEND_PHOTOS = (1 << 11) | Self::SEND_MESSAGES.bits();
 
         /// Set if the user is allowed to send videos. implies
         /// `SEND_MESSAGES`.
-        const SEND_VIDEOS = (1 << 12) | Self::SEND_MESSAGES.bits;
+        const SEND_VIDEOS = (1 << 12) | Self::SEND_MESSAGES.bits();
 
         /// Set if the user is allowed to send video notes. implies
         /// `SEND_MESSAGES`.
-        const SEND_VIDEO_NOTES = (1 << 13) | Self::SEND_MESSAGES.bits;
+        const SEND_VIDEO_NOTES = (1 << 13) | Self::SEND_MESSAGES.bits();
 
         /// Set if the user is allowed to send voice notes. implies
         /// `SEND_MESSAGES`.
-        const SEND_VOICE_NOTES = (1 << 14) | Self::SEND_MESSAGES.bits;
+        const SEND_VOICE_NOTES = (1 << 14) | Self::SEND_MESSAGES.bits();
 
         /// Set if the user is allowed to send audios, documents,
         /// photos, videos, video notes and voice notes, implies
         /// `SEND_MESSAGES`, `SEND_AUDIOS`, `SEND_DOCUMENTS`,
         /// `SEND_PHOTOS`, `SEND_VIDEOS`, `SEND_VIDEO_NOTES` and `SEND_VOICE_NOTES`.
         /// Note: this is not a separate permission on it's own, this is just a alias for all the permissions mentioned.
-        const SEND_MEDIA_MESSAGES = Self::SEND_MESSAGES.bits
-                                            | Self::SEND_AUDIOS.bits
-                                            | Self::SEND_DOCUMENTS.bits
-                                            | Self::SEND_PHOTOS.bits
-                                            | Self::SEND_VIDEOS.bits
-                                            | Self::SEND_VIDEO_NOTES.bits
-                                            | Self::SEND_VOICE_NOTES.bits;
+        const SEND_MEDIA_MESSAGES = Self::SEND_MESSAGES.bits()
+                                            | Self::SEND_AUDIOS.bits()
+                                            | Self::SEND_DOCUMENTS.bits()
+                                            | Self::SEND_PHOTOS.bits()
+                                            | Self::SEND_VIDEOS.bits()
+                                            | Self::SEND_VIDEO_NOTES.bits()
+                                            | Self::SEND_VOICE_NOTES.bits();
 
     }
 }

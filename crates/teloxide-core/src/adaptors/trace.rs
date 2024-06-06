@@ -64,6 +64,7 @@ bitflags::bitflags! {
     /// // Trace requests verbosely and responses (non verbosely)
     /// let _ = Settings::TRACE_REQUESTS_VERBOSE | Settings::TRACE_RESPONSES;
     /// ```
+    #[derive(Clone, Copy, Debug)]
     pub struct Settings: u8 {
         /// Trace requests (only request kind, e.g. `send_message`)
         const TRACE_REQUESTS = 0b00000001;
@@ -84,12 +85,12 @@ bitflags::bitflags! {
         /// Trace everything.
         ///
         /// Implies [`TRACE_REQUESTS`] and [`TRACE_RESPONSES`].
-        const TRACE_EVERYTHING = Self::TRACE_REQUESTS.bits | Self::TRACE_RESPONSES.bits;
+        const TRACE_EVERYTHING = Self::TRACE_REQUESTS.bits() | Self::TRACE_RESPONSES.bits();
 
         /// Trace everything verbosely.
         ///
         /// Implies [`TRACE_REQUESTS_VERBOSE`] and [`TRACE_RESPONSES_VERBOSE`].
-        const TRACE_EVERYTHING_VERBOSE = Self::TRACE_REQUESTS_VERBOSE.bits | Self::TRACE_RESPONSES_VERBOSE.bits;
+        const TRACE_EVERYTHING_VERBOSE = Self::TRACE_REQUESTS_VERBOSE.bits() | Self::TRACE_RESPONSES_VERBOSE.bits();
     }
 }
 

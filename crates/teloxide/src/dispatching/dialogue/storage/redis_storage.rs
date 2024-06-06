@@ -31,7 +31,7 @@ where
 
 /// A dialogue storage based on [Redis](https://redis.io/).
 pub struct RedisStorage<S> {
-    conn: Mutex<redis::aio::Connection>,
+    conn: Mutex<redis::aio::MultiplexedConnection>,
     serializer: S,
 }
 
@@ -41,7 +41,7 @@ impl<S> RedisStorage<S> {
         serializer: S,
     ) -> Result<Arc<Self>, RedisStorageError<Infallible>> {
         Ok(Arc::new(Self {
-            conn: Mutex::new(redis::Client::open(url)?.get_async_connection().await?),
+            conn: Mutex::new(redis::Client::open(url)?.get_multiplexed_async_connection().await?),
             serializer,
         }))
     }

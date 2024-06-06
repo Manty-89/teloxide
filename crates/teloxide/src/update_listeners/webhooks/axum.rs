@@ -52,8 +52,8 @@ where
     let stop_token = update_listener.stop_token();
 
     tokio::spawn(async move {
-        axum::Server::bind(&address)
-            .serve(app.into_make_service())
+        let listener = tokio::net::TcpListener::bind(&address).await.expect("Scoket bind error");
+        axum::serve(listener, app.into_make_service())
             .with_graceful_shutdown(stop_flag)
             .await
             .map_err(|err| {
